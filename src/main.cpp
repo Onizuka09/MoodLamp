@@ -20,9 +20,29 @@ StaticJsonDocument<200> jbuf;
 Adafruit_NeoPixel strip(Led_COUNT, strip_Pin, NEO_GBR + NEO_KHZ800);
 
 
+void handle_stripBrightness (){
+  String data = server.arg("plain");
+  DeserializationError error = deserializeJson(jbuf, data);
+
+  // Test if parsing succeeds.
+  if (error)
+  {
+    debug.print(F("deserializeJson() failed: "));
+    debug.println(error.f_str());
+    server.send(404, "text/plain", "Not a json string");
+    return;
+  }
+  uint8_t brightness = jbuf["bright"];
+
+
+  debug.println(brightness);
+  strip.setBrightness(brightness);
+  strip.show();
+  server.send(200, "text/plain", "strip brightness set");
+}
 
 void set_stripColor(uint8_t red,uint8_t green,uint8_t blue  ){
-  uint32_t color = strip.Color(red, green, blue);
+  uint32_t color = strip.Color(blue, green, red);
   strip.fill(color, 0, Led_COUNT - 1);
   strip.show(); 
 }
@@ -130,6 +150,8 @@ void setup()
 
   server.on("/off", handle_OFF);
   server.on("/disconnect", handle_disconnect);
+  server.on("/set_stripBrightness", handle_stripBrightness);
+
   server.onNotFound(handle_NotFound);
 
   // server.on("/off", []()
