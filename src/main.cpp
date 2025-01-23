@@ -3,10 +3,23 @@
 #include <ESP8266mDNS.h>
 #include <ArduinoJson.h>
 #include <Adafruit_NeoPixel.h>
-
-const char *ssid = "TOPNET_84D0";
-const char *psswd = "emjsr5u0ui";
+// #define wifi_net 1
+ const char *ssid = "TOPNET_84D0";
+ const char *psswd = "emjsr5u0ui";
 bool is_connected = false ;  
+
+//const char* ssid = "esp_ledMoodLamp";
+//const char* password = "freeways";
+//If the assigned password is shorter than 8 characters, the SSID will be ignored.
+// const char* password = "52807891";
+
+#define hidden  false //(default)optional parameter, if set to true will hide SSID.
+#define max_connection 8 //(4 is default)(0--8)
+#define channl 1
+
+IPAddress local_IP(192,168,4,22);//set up an ip adress
+IPAddress gateway(192,168,4,9);
+IPAddress subnet(255,255,255,0);// subnet mask to indicacte the host and the network 
 
 #define strip_Pin D3
 #define Led_COUNT 60
@@ -117,17 +130,18 @@ void setup()
   pinMode(debug_led, OUTPUT);
   pinMode(relay_Pin, OUTPUT);
   digitalWrite(debug_led, 0); // HIGH
-
+  WiFi.disconnect();
   WiFi.begin(ssid, psswd);
-  while (WiFi.status() != WL_CONNECTED)
-  {
-  digitalWrite(debug_led, 0); // HIGH
-  delay(250);
+  //WiFi.softAP(ssid, password, channl, hidden, max_connection);
+   while (WiFi.status() != WL_CONNECTED)
+   {
+   digitalWrite(debug_led, 0); // HIGH
+   delay(250);
   digitalWrite(debug_led, 1); // HIGH
-  delay(250);
-  debug.print(".");
-  }
-  
+   delay(250);
+   debug.print(".");
+   }
+
   debug.println("");
   debug.print("connected to ");
   debug.println(ssid);
