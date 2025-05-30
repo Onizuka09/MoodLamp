@@ -1,0 +1,27 @@
+#include "images.h"
+
+const ext_img_desc_t images[23] = {
+    { "img1", &img_img1 },
+    { "hot", &img_hot },
+    { "humidity", &img_humidity },
+    { "icon_50d_50n_72p", &img_icon_50d_50n_72p },
+    { "icon_13d_13n_72p", &img_icon_13d_13n_72p },
+    { "icon_11d_11n_72p", &img_icon_11d_11n_72p },
+    { "icon_10n_72p", &img_icon_10n_72p },
+    { "icon_10d_72p", &img_icon_10d_72p },
+    { "icon_09d_09n_72p", &img_icon_09d_09n_72p },
+    { "icon_04d_04n_72p", &img_icon_04d_04n_72p },
+    { "icon_03d_03n_72p", &img_icon_03d_03n_72p },
+    { "icon_02n_72p", &img_icon_02n_72p },
+    { "icon_02d_72p", &img_icon_02d_72p },
+    { "icon_01n_72p", &img_icon_01n_72p },
+    { "icon_01d_72p", &img_icon_01d_72p },
+    { "icon_wind_11p", &img_icon_wind_11p },
+    { "icon_visibility_11p", &img_icon_visibility_11p },
+    { "icon_temp_22p", &img_icon_temp_22p },
+    { "icon_pressure_11p", &img_icon_pressure_11p },
+    { "icon_min_11p", &img_icon_min_11p },
+    { "icon_max_11p", &img_icon_max_11p },
+    { "icon_location_11p", &img_icon_location_11p },
+    { "icon_humd 22p", &img_icon_humd_22p },
+};
